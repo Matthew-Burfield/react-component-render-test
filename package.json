@@ -3,11 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "15.1.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-react": "7.3.0",
     "react-scripts": "1.0.11"
   },
   "dependencies": {
+    "immutable": "^3.8.1",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-addons-perf": "^15.4.2",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-immutable": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,21 +1,52 @@
+
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Perf from 'react-addons-perf';
+import { connect } from 'react-redux';
+import { increaseCounter } from './redux/actionCreators';
+
+import ClassComponentWithFlatProp from './components/ClassComponentWithFlatProp/ClassComponentWithFlatProp';
+import ClassComponentWithObjectProp from './components/ClassComponentWithObjectProp/ClassComponentWithObjectProp';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    Perf.stop();
+    Perf.printIncludive();
+    Perf.printWasted();
+  }
+
+  handleButtonClick() {
+    Perf.start();
+    this.props.increaseCount();
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <button onClick={this.handleButtonClick}>Increase Counter</button>
+        <ClassComponentWithFlatProp />
+        <ClassComponentWithObjectProp />
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  increaseCount: PropTypes.func,
+};
+
+App.defaultProps = {
+  increaseCount: () => {},
+};
+
+const mapDispatchToProps = dispatch => ({
+  increaseCount: () => dispatch(increaseCounter()),
+});
+
+export default connect(null, mapDispatchToProps)(App);
